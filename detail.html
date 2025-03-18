@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Diary App</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f8f8;
+            color: #333;
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .app-container {
+            background-color: white;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 20px;
+        }
+        
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .greeting {
+            font-size: 24px;
+            font-weight: 600;
+            color: #222;
+        }
+        
+        .camera-icon {
+            background-color: #000;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .date-indicator {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .mood-container {
+            background-color: #f5f5f5;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .mood-emoji {
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        
+        .mood-text h3 {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .mood-text p {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .calendar-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+        
+        .calendar-day {
+            min-width: 65px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 15px;
+            border: 1px solid #eee;
+            background-color: white;
+        }
+        
+        .calendar-day.active {
+            background-color: #ccff00;
+            border-color: #ccff00;
+        }
+        
+        .calendar-day .month {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .calendar-day .date {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .calendar-day .day {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .diary-timeline {
+            position: relative;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 5px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #ddd;
+        }
+        
+        .diary-entry {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            top: 15px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ccff00;
+        }
+        
+        .diary-card {
+            background-color: #fffaed;
+            border-radius: 15px;
+            padding: 15px;
+            position: relative;
+        }
+        
+        .diary-card h3 {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .diary-card p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .diary-time {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .tag {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background-color: #ccff00;
+            color: #333;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 15px;
+        }
+        
+        .tag.adventure {
+            background-color: #ffcc99;
+        }
+        
+        .add-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #000;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        
+        .diary-detail {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            padding: 20px;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .back-button {
+            font-size: 28px;
+            cursor: pointer;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: #f5f5f5;
+            transition: all 0.2s ease;
+            z-index: 5;
+        }
+
+        .back-button:hover {
+            background-color: #e0e0e0;
+            transform: scale(1.05);
+        }
+        
+        .detail-date-header {
+            text-align: center;
+            margin: 10px 0 25px;
+            padding: 15px;
+            background: linear-gradient(135deg, #ccff00, #8aff80);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(204, 255, 0, 0.2);
+            color: #333;
+        }
+        
+        .detail-date {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .detail-time {
+            font-size: 20px;
+            font-weight: 500;
+            color: #444;
+            margin-bottom: 5px;
+        }
+        
+        .detail-authors {
+            font-size: 14px;
+            font-style: italic;
+            color: #555;
+            margin-top: 8px;
+        }
+        
+        .detail-content {
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease;
+            position: relative;
+            background-image: linear-gradient(#f9f9f9 1px, transparent 1px);
+            background-size: 100% 26px;
+            line-height: 26px;
+        }
+
+        .detail-content:hover {
+            transform: translateY(-5px);
+        }
+        
+        .detail-content h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #222;
+            font-family: 'Dancing Script', cursive;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        .detail-content p {
+            font-family: 'Caveat', cursive;
+            font-size: 22px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #333;
+            text-shadow: 0.2px 0.2px 0.2px rgba(0,0,0,0.2);
+            font-weight: 500;
+        }
+        
+        .detail-tag {
+            display: inline-block;
+            background-color: #ccff00;
+            color: #333;
+            font-size: 14px;
+            padding: 8px 20px;
+            border-radius: 25px;
+            margin-top: 20px;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(204, 255, 0, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .detail-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(204, 255, 0, 0.3);
+        }
+
+        /* Custom scrollbar for diary detail */
+        .diary-detail::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .diary-detail::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .diary-detail::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        .diary-detail::-webkit-scrollbar-thumb:hover {
+            background: #666;
+        }
+        
+        /* Hide scrollbar */
+        .calendar-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 15px;
+            font-size: 20px;
+            color: white;
+            background-color: #4e2a84; /* Purple background */
+            padding: 8px 12px; /* Padding for better appearance */
+            border-radius: 5px; /* Rounded corners */
+            text-decoration: none; /* Remove underline */
+            transition: background-color 0.3s; /* Smooth transition */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+        }
+
+        .back-link:hover {
+            background-color: #3b1e6f; /* Darker purple on hover */
+        }
+
+        .entry-content {
+            background-color: transparent;
+            border-radius: 0;
+            padding: 0;
+            margin-bottom: 30px;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="app-header">
+            <div class="greeting">Morning, Eza</div>
+            <div class="camera-icon">📷</div>
+        </div>
+        
+        <div class="date-indicator">Today</div>
+        
+        <div class="mood-container">
+            <div class="mood-emoji">😊</div>
+            <div class="mood-text">
+                <h3>Your mood is good</h3>
+                <p>Keep it in your mood to be a good person.</p>
+            </div>
+        </div>
+        
+        <div class="section-title">Your Diary</div>
+        
+        <div class="calendar-scroll">
+            <div class="calendar-day">
+                <div class="month">Nov</div>
+                <div class="date">28</div>
+                <div class="day">Tue</div>
+            </div>
+            <div class="calendar-day active">
+                <div class="month">Nov</div>
+                <div class="date">29</div>
+                <div class="day">Wed</div>
+            </div>
+            <div class="calendar-day">
+                <div class="month">Nov</div>
+                <div class="date">30</div>
+                <div class="day">Thu</div>
+            </div>
+            <div class="calendar-day">
+                <div class="month">Dec</div>
+                <div class="date">1</div>
+                <div class="day">Fri</div>
+            </div>
+            <div class="calendar-day">
+                <div class="month">Dec</div>
+                <div class="date">2</div>
+                <div class="day">Sat</div>
+            </div>
+        </div>
+        
+        <div class="diary-timeline">
+            <div class="timeline-line"></div>
+            
+            <div class="diary-entry" onclick="showDiaryDetail('random')">
+                <div class="timeline-dot"></div>
+                <div class="diary-card">
+                    <h3>Random Thoughts</h3>
+                    <p>Contemplating life's mysteries, like why do we press harder on the remote control when we know the batteries are weak?</p>
+                    <div class="diary-time">07:23 AM</div>
+                    <div class="tag">Random</div>
+                </div>
+            </div>
+            
+            <div class="diary-entry" onclick="showDiaryDetail('adventure')">
+                <div class="timeline-dot"></div>
+                <div class="diary-card">
+                    <h3>Afternoon Adventures</h3>
+                    <p>Embarked on a quest to find the missing sock. Concluded that the washing machine is a portal to a sock dimension.</p>
+                    <div class="diary-time">12:45 PM</div>
+                    <div class="tag adventure">Adventure</div>
+                </div>
+            </div>
+            
+            <div class="diary-entry" onclick="showDiaryDetail('office')">
+                <div class="timeline-dot"></div>
+                <div class="diary-card">
+                    <h3>Office Escapades</h3>
+                    <p>Survived another round of Zoom meetings. Perfected the art of looking engaged while daydreaming about vacation.</p>
+                    <div class="diary-time">04:30 PM</div>
+                    <div class="tag">Work</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="add-button">+</div>
+    
+    <!-- Diary Detail Pages -->
+    <div id="diary-detail-random" class="diary-detail">
+        <div class="detail-header">
+            <div class="back-button" onclick="hideDiaryDetail('random')">←</div>
+            <h2>Random Thoughts</h2>
+        </div>
+        <div class="detail-date-header">
+            <div class="detail-date">November 29</div>
+            <div class="detail-time">07:23 AM</div>
+        </div>
+        <div class="detail-authors">Written by Rahul & Siri</div>
+        <div class="detail-content">
+            <p>Contemplating life's mysteries, like why do we press harder on the remote control when we know the batteries are weak? It's as if we believe our extra force will somehow transfer energy into the dying batteries.</p>
+            
+            <p>Also wondered why we have eyebrows. Besides the obvious function of keeping sweat out of our eyes, they're strangely expressive. Entire conversations can happen with just eyebrow movements.</p>
+            
+            <p>Noticed how we all pretend to read the terms and conditions but just scroll to the bottom and click "I agree." What if there's something important in there? What if one day they slip in "you agree to give us your firstborn child" and we just casually accept it?</p>
+            
+            <p>And why do we open the refrigerator multiple times hoping food will magically appear? As if the fridge fairy will deliver snacks between our checks.</p>
+            
+            <div class="detail-tag">Random</div>
+        </div>
+    </div>
+    
+    <div id="diary-detail-adventure" class="diary-detail">
+        <div class="detail-header">
+            <div class="back-button" onclick="hideDiaryDetail('adventure')">←</div>
+            <h2>Afternoon Adventures</h2>
+        </div>
+        <div class="detail-date-header">
+            <div class="detail-date">November 29</div>
+            <div class="detail-time">12:45 PM</div>
+        </div>
+        <div class="detail-authors">Written by Rahul & Siri</div>
+        <div class="detail-content">
+            <p>Embarked on a quest to find the missing sock. Turned the laundry room upside down searching for the blue striped sock that seems to have vanished into thin air.</p>
+            
+            <p>After careful investigation and consideration of all possible explanations, I've concluded that the washing machine is definitely a portal to a sock dimension. There's simply no other logical explanation for how socks can enter the washer in pairs and emerge as singles.</p>
+            
+            <p>Perhaps in this alternate dimension, there's a creature with thousands of mismatched socks, wondering how they keep appearing. Or maybe there's a thriving sock economy where my missing items are highly valued currency.</p>
+            
+            <p>In related news, I've decided to only buy identical socks from now on. Let's see how the sock dimension deals with that strategy!</p>
+            
+            <div class="detail-tag">Adventure</div>
+        </div>
+    </div>
+    
+    <div id="diary-detail-office" class="diary-detail">
+        <div class="detail-header">
+            <div class="back-button" onclick="hideDiaryDetail('office')">←</div>
+            <h2>Office Escapades</h2>
+        </div>
+        <div class="detail-date-header">
+            <div class="detail-date">November 29</div>
+            <div class="detail-time">04:30 PM</div>
+        </div>
+        <div class="detail-authors">Written by Rahul & Siri</div>
+        <div class="detail-content">
+            <p>Survived another round of Zoom meetings today. Three hours of my life I'll never get back, but at least I've perfected the art of looking engaged while actually daydreaming about my next vacation.</p>
+            
+            <p>The highlight was when Jim forgot he wasn't on mute and had a full conversation with his cat about dinner plans. Everyone pretended not to notice, but the chat was exploding with cat emojis.</p>
+            
+            <p>Sarah's virtual background glitched again, causing her head to repeatedly disappear and reappear throughout her presentation. Somehow made her points about quarterly projections much more interesting.</p>
+            
+            <p>Made a game of counting how many times the boss said "circle back" (final tally: 17). Small victories keep me going.</p>
+            
+            <div class="detail-tag">Work</div>
+        </div>
+    </div>
+    
+    <script>
+        function showDiaryDetail(type) {
+            document.getElementById('diary-detail-' + type).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function hideDiaryDetail(type) {
+            document.getElementById('diary-detail-' + type).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Make calendar days clickable
+        const calendarDays = document.querySelectorAll('.calendar-day');
+        calendarDays.forEach(day => {
+            day.addEventListener('click', function() {
+                calendarDays.forEach(d => d.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

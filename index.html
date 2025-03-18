@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Diary App</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: white;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        
+        .app-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .greeting {
+            font-size: 24px;
+            font-weight: 600;
+            color: #222;
+        }
+        
+        .camera-icon {
+            background-color: #000;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .date-indicator {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .mood-container {
+            background-color: #f5f5f5;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .mood-emoji {
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        
+        .mood-text h3 {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .mood-text p {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .calendar-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+        
+        .calendar-day {
+            min-width: 65px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 15px;
+            border: 1px solid #eee;
+            background-color: white;
+        }
+        
+        .calendar-day.active {
+            background-color: #ccff00;
+            border-color: #ccff00;
+        }
+        
+        .calendar-day .month {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .calendar-day .date {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .calendar-day .day {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .diary-timeline {
+            position: relative;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 5px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #ddd;
+        }
+        
+        .diary-entry {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            top: 15px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ccff00;
+        }
+        
+        .diary-card {
+            background-color: #fffaed;
+            border-radius: 15px;
+            padding: 15px;
+            position: relative;
+        }
+        
+        .diary-card h3 {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .diary-card p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .diary-time {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .tag {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background-color: #ccff00;
+            color: #333;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 15px;
+        }
+        
+        .tag.adventure {
+            background-color: #ffcc99;
+        }
+        
+        .add-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #000;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .diary-detail {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: white;
+            z-index: 100;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .back-button {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .detail-content {
+            padding: 20px;
+            background-color: #fffaed;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .detail-content h2 {
+            margin-bottom: 15px;
+        }
+        
+        .detail-content p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .detail-time {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 20px;
+        }
+        
+        .detail-tag {
+            display: inline-block;
+            background-color: #ccff00;
+            color: #333;
+            font-size: 14px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-top: 10px;
+        }
+        
+        /* Hide scrollbar */
+        .calendar-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        
+        /* Responsive design */
+        @media (min-width: 768px) {
+            .app-container {
+                display: grid;
+                grid-template-columns: 1fr 3fr;
+                grid-gap: 30px;
+            }
+            
+            .app-header, .date-indicator, .mood-container {
+                grid-column: 1 / -1;
+            }
+            
+            .section-title {
+                grid-column: 1 / -1;
+                margin-top: 20px;
+            }
+            
+            .calendar-scroll {
+                grid-column: 1;
+                flex-direction: column;
+                overflow-x: visible;
+                overflow-y: auto;
+                max-height: 400px;
+            }
+            
+            .calendar-day {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                min-width: auto;
+            }
+            
+            .calendar-day .month {
+                order: 1;
+            }
+            
+            .calendar-day .date {
+                order: 2;
+            }
+            
+            .calendar-day .day {
+                order: 3;
+            }
+            
+            .diary-timeline {
+                grid-column: 2;
+            }
+            
+            .diary-entry {
+                max-width: 800px;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .app-container {
+                padding: 40px;
+            }
+            
+            .diary-detail {
+                width: 80%;
+                left: 10%;
+                top: 5%;
+                bottom: 5%;
+                border-radius: 20px;
+            }
+        }
+        
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 15px;
+            font-size: 20px;
+            color: white;
+            background-color: #4e2a84; /* Purple background */
+            padding: 8px 12px; /* Padding for better appearance */
+            border-radius: 5px; /* Rounded corners */
+            text-decoration: none; /* Remove underline */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+        
+        .back-link:hover {
+            background-color: #3b1e6f; /* Darker purple on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="app-header">
+            <div class="greeting">Morning, Eza</div>
+            <div class="camera-icon">📷</div>
+        </div>
+        
+        <div class="date-indicator">Today</div>
+        
+        <div class="mood-container">
+            <div class="mood-emoji">😊</div>
+            <div class="mood-text">
+                <h3>Your mood is good</h3>
+                <p>Keep it in your mood to be a good person.</p>
+            </div>
+        </div>
+        
+        <div class="section-title">Your Diary</div>
+        
+        <div class="calendar-scroll">
+            <div class="calendar-day">
+                <div class="month">Nov</div>
+                <div class="date">28</div>
+                <div class="day">Tue</div>
+            </div>
+            <div class="calendar-day active">
+                <div class="month">Nov</div>
+                <div class="date">29</div>
+                <div class="day">Wed</div>
+            </div>
+            <div class="calendar-day">
+                <div class="month">Nov</div>
+                <div class="date">30</div>
+                <div class="day">Thu</div>
+            </div>
+            <div class="calendar-day">
+                <div class="month">Dec</div>
+                <div class="date">1</div>
+                <div class="day">Fri</div>
+            </div>
+            <div class="calendar-day">
+                <div class="month">Dec</div>
+                <div class="date">2</div>
+                <div class="day">Sat</div>
+            </div>
+            <div class="calendar-day">
+                <div class="month">Dec</div>
+                <div class="date">3</div>
+                <div class="day">Sun</div>
+            </div>
+            <div class="calendar-day">
+                <div class="month">Dec</div>
+                <div class="date">4</div>
+                <div class="day">Mon</div>
+            </div>
+        </div>
+        
+        <div class="diary-timeline">
+            <div class="timeline-line"></div>
+            
+            <div class="diary-entry" onclick="navigateToDate('nov29.html#random')">
+                <div class="timeline-dot"></div>
+                <div class="diary-card">
+                    <h3>Random Thoughts</h3>
+                    <p>Contemplating life's mysteries, like why do we press harder on the remote control when we know the batteries are weak?</p>
+                    <div class="diary-time">07:23 AM</div>
+                    <div class="tag">Random</div>
+                </div>
+            </div>
+            
+            <div class="diary-entry" onclick="navigateToDate('nov29_adventure.html')">
+                <div class="timeline-dot"></div>
+                <div class="diary-card">
+                    <h3>Afternoon Adventures</h3>
+                    <p>Embarked on a quest to find the missing sock. Concluded that the washing machine is a portal to a sock dimension.</p>
+                    <div class="diary-time">12:45 PM</div>
+                    <div class="tag adventure">Adventure</div>
+                </div>
+            </div>
+            
+            <div class="diary-entry" onclick="navigateToDate('nov29_work.html')">
+                <div class="timeline-dot"></div>
+                <div class="diary-card">
+                    <h3>Office Escapades</h3>
+                    <p>Survived another round of Zoom meetings. Perfected the art of looking engaged while daydreaming about vacation.</p>
+                    <div class="diary-time">04:30 PM</div>
+                    <div class="tag">Work</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="add-button">+</div>
+    
+    <!-- Diary Detail Pages -->
+    <div id="diary-detail-random" class="diary-detail">
+        <div class="detail-header">
+            <div class="back-button" onclick="hideDiaryDetail('random')">←</div>
+            <h2>Random Thoughts</h2>
+        </div>
+        <div class="detail-time">November 29, 2023 - 07:23 AM</div>
+        <div class="detail-content">
+            <p>Contemplating life's mysteries, like why do we press harder on the remote control when we know the batteries are weak? It's as if we believe our extra force will somehow transfer energy into the dying batteries.</p>
+            
+            <p>Also wondered why we have eyebrows. Besides the obvious function of keeping sweat out of our eyes, they're strangely expressive. Entire conversations can happen with just eyebrow movements.</p>
+            
+            <p>Noticed how we all pretend to read the terms and conditions but just scroll to the bottom and click "I agree." What if there's something important in there? What if one day they slip in "you agree to give us your firstborn child" and we just casually accept it?</p>
+            
+            <p>And why do we open the refrigerator multiple times hoping food will magically appear? As if the fridge fairy will deliver snacks between our checks.</p>
+            
+            <div class="detail-tag">Random</div>
+        </div>
+    </div>
+    
+    <div id="diary-detail-adventure" class="diary-detail">
+        <div class="detail-header">
+            <div class="back-button" onclick="hideDiaryDetail('adventure')">←</div>
+            <h2>Afternoon Adventures</h2>
+        </div>
+        <div class="detail-time">November 29, 2023 - 12:45 PM</div>
+        <div class="detail-content">
+            <p>Embarked on a quest to find the missing sock. Turned the laundry room upside down searching for the blue striped sock that seems to have vanished into thin air.</p>
+            
+            <p>After careful investigation and consideration of all possible explanations, I've concluded that the washing machine is definitely a portal to a sock dimension. There's simply no other logical explanation for how socks can enter the washer in pairs and emerge as singles.</p>
+            
+            <p>Perhaps in this alternate dimension, there's a creature with thousands of mismatched socks, wondering how they keep appearing. Or maybe there's a thriving sock economy where my missing items are highly valued currency.</p>
+            
+            <p>In related news, I've decided to only buy identical socks from now on. Let's see how the sock dimension deals with that strategy!</p>
+            
+            <div class="detail-tag">Adventure</div>
+        </div>
+    </div>
+    
+    <div id="diary-detail-office" class="diary-detail">
+        <div class="detail-header">
+            <div class="back-button" onclick="hideDiaryDetail('office')">←</div>
+            <h2>Office Escapades</h2>
+        </div>
+        <div class="detail-time">November 29, 2023 - 04:30 PM</div>
+        <div class="detail-content">
+            <p>Survived another round of Zoom meetings today. Three hours of my life I'll never get back, but at least I've perfected the art of looking engaged while actually daydreaming about my next vacation.</p>
+            
+            <p>The highlight was when Jim forgot he wasn't on mute and had a full conversation with his cat about dinner plans. Everyone pretended not to notice, but the chat was exploding with cat emojis.</p>
+            
+            <p>Sarah's virtual background glitched again, causing her head to repeatedly disappear and reappear throughout her presentation. Somehow made her points about quarterly projections much more interesting.</p>
+            
+            <p>Made a game of counting how many times the boss said "circle back" (final tally: 17). Small victories keep me going.</p>
+            
+            <div class="detail-tag">Work</div>
+        </div>
+    </div>
+    
+    <script>
+        // Display current date and time
+        function updateDateTime() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateStr = now.toLocaleDateString('en-US', options);
+            const timeStr = now.toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'});
+            
+            document.getElementById('current-date').textContent = dateStr;
+            document.getElementById('current-time').textContent = timeStr;
+        }
+        
+        // Update time on load
+        updateDateTime();
+        // Update time every minute
+        setInterval(updateDateTime, 60000);
+        
+        function showDiaryDetail(type) {
+            document.getElementById('diary-detail-' + type).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function hideDiaryDetail(type) {
+            document.getElementById('diary-detail-' + type).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function navigateToDate(dateFile) {
+            // Navigate directly to the date file
+            window.location.href = dateFile;
+        }
+        
+        // Make calendar days clickable
+        const calendarDays = document.querySelectorAll('.calendar-day');
+        calendarDays.forEach(day => {
+            day.addEventListener('click', function() {
+                calendarDays.forEach(d => d.classList.remove('active'));
+                this.classList.add('active');
+                // Navigate is now handled by the onclick attribute
+            });
+        });
+    </script>
+</body>
+</html>
