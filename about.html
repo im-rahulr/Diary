@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Personal Diary App</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: white;
+            color: #333;
+            line-height: 1.6;
+            padding: 0;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            color: #222;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        section {
+            margin-bottom: 40px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        h2:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: #ccff00;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+        
+        .feature-box {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .feature {
+            flex: 0 0 48%;
+            background: #f8f8f8;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .feature h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #222;
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            background-color: #ccff00;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .back-link:hover {
+            background-color: #b8e600;
+        }
+        
+        /* Footer Styles */
+        .footer {
+            background-color: #f8f8f8;
+            padding: 25px 0;
+            text-align: center;
+            margin-top: 40px;
+            border-top: 1px solid #ddd;
+            font-size: 14px;
+            color: #666;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .footer-copyright {
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+        
+        .footer-links {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #333;
+            margin: 0 15px;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            background-color: #ccff00;
+            color: #000;
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .feature {
+                flex: 0 0 100%;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>About Personal Diary</h1>
+            <p>Your personal space to document your journey</p>
+        </header>
+        
+        <section>
+            <h2>Our Story</h2>
+            <p>Personal Diary App was created to provide a simple yet powerful way to document your daily experiences, thoughts, and feelings. The inspiration behind this app came from our passion for personal growth through self-reflection and journaling.</p>
+            <p>Started as a small project at Lowry College, this application has evolved into a comprehensive diary tool designed specifically for students to capture their college memories and experiences.</p>
+        </section>
+        
+        <section>
+            <h2>Features</h2>
+            <p>Our diary app offers several features to enhance your journaling experience:</p>
+            
+            <div class="feature-box">
+                <div class="feature">
+                    <div class="feature-icon">📝</div>
+                    <h3>Daily Entries</h3>
+                    <p>Record your thoughts, experiences, and emotions with dated entries that are easy to organize and access.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🗓️</div>
+                    <h3>Calendar View</h3>
+                    <p>Easily navigate through your entries with our intuitive calendar interface.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🏷️</div>
+                    <h3>Categorization</h3>
+                    <p>Tag your entries with categories like "Work," "Adventure," "Personal," and more for better organization.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">💾</div>
+                    <h3>Local Storage</h3>
+                    <p>Your entries are saved locally on your device, ensuring privacy and easy access.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Our Mission</h2>
+            <p>We believe in the power of regular journaling to improve mental clarity, emotional intelligence, and personal growth. Our mission is to provide a tool that makes this practice accessible, enjoyable, and beneficial for everyone.</p>
+            <p>By documenting your college life journey, you create a lasting record of your experiences, growth, and memories that you can look back on for years to come.</p>
+        </section>
+        
+        <a href="index.html" class="back-link">← Back to Diary</a>
+    </div>
+    
+    <div class="footer">
+        <div class="footer-copyright">© 2024 Personal Diary App</div>
+        <div class="footer-links">
+            <a href="about.html">About</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="index.html">New Entry</a>
+            <a href="mailto:rahulr@mailo.com">Contact</a>
+        </div>
+    </div>
+</body>
+</html> 

@@ -174,6 +174,12 @@
             font-size: 14px;
             color: #666;
             margin-bottom: 10px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .diary-time {
@@ -358,201 +364,659 @@
         .back-link:hover {
             background-color: #3b1e6f; /* Darker purple on hover */
         }
+        
+        /* Form styles */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #ccff00;
+            box-shadow: 0 0 0 2px rgba(204, 255, 0, 0.2);
+        }
+        
+        .btn-primary {
+            background-color: #000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #333;
+        }
+        
+        /* Footer Styles */
+        .footer {
+            background-color: #f8f8f8;
+            padding: 25px 0;
+            text-align: center;
+            margin-top: 40px;
+            border-top: 1px solid #ddd;
+            font-size: 14px;
+            color: #666;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .footer-copyright {
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+        
+        .footer-links {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #333;
+            margin: 0 15px;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            background-color: #ccff00;
+            color: #000;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
     <div class="app-container">
         <div class="app-header">
-            <div class="greeting">Morning, Eza</div>
-            <div class="camera-icon">📷</div>
+            <div class="greeting">Hello, Lowry</div>
+            <div class="camera-icon">😪</div>
         </div>
         
-        <div class="date-indicator">Today</div>
+        <div class="date-indicator">We....</div>
         
         <div class="mood-container">
             <div class="mood-emoji">😊</div>
             <div class="mood-text">
                 <h3>Your mood is good</h3>
-                <p>Keep it in your mood to be a good person.</p>
+                <p>Documenting the journey of college life—friendships, experiences, and memories! ✨</p>
             </div>
         </div>
         
         <div class="section-title">Your Diary</div>
         
         <div class="calendar-scroll">
-            <div class="calendar-day">
-                <div class="month">Nov</div>
-                <div class="date">28</div>
-                <div class="day">Tue</div>
-            </div>
-            <div class="calendar-day active">
-                <div class="month">Nov</div>
-                <div class="date">29</div>
-                <div class="day">Wed</div>
-            </div>
-            <div class="calendar-day">
-                <div class="month">Nov</div>
-                <div class="date">30</div>
-                <div class="day">Thu</div>
-            </div>
-            <div class="calendar-day">
-                <div class="month">Dec</div>
-                <div class="date">1</div>
-                <div class="day">Fri</div>
-            </div>
-            <div class="calendar-day">
-                <div class="month">Dec</div>
-                <div class="date">2</div>
-                <div class="day">Sat</div>
-            </div>
-            <div class="calendar-day">
-                <div class="month">Dec</div>
-                <div class="date">3</div>
-                <div class="day">Sun</div>
-            </div>
-            <div class="calendar-day">
-                <div class="month">Dec</div>
-                <div class="date">4</div>
-                <div class="day">Mon</div>
-            </div>
+            <!-- Calendar days will be generated dynamically by JavaScript -->
         </div>
         
         <div class="diary-timeline">
             <div class="timeline-line"></div>
-            
-            <div class="diary-entry" onclick="navigateToDate('nov29.html#random')">
-                <div class="timeline-dot"></div>
-                <div class="diary-card">
-                    <h3>Random Thoughts</h3>
-                    <p>Contemplating life's mysteries, like why do we press harder on the remote control when we know the batteries are weak?</p>
-                    <div class="diary-time">07:23 AM</div>
-                    <div class="tag">Random</div>
-                </div>
-            </div>
-            
-            <div class="diary-entry" onclick="navigateToDate('nov29_adventure.html')">
-                <div class="timeline-dot"></div>
-                <div class="diary-card">
-                    <h3>Afternoon Adventures</h3>
-                    <p>Embarked on a quest to find the missing sock. Concluded that the washing machine is a portal to a sock dimension.</p>
-                    <div class="diary-time">12:45 PM</div>
-                    <div class="tag adventure">Adventure</div>
-                </div>
-            </div>
-            
-            <div class="diary-entry" onclick="navigateToDate('nov29_work.html')">
-                <div class="timeline-dot"></div>
-                <div class="diary-card">
-                    <h3>Office Escapades</h3>
-                    <p>Survived another round of Zoom meetings. Perfected the art of looking engaged while daydreaming about vacation.</p>
-                    <div class="diary-time">04:30 PM</div>
-                    <div class="tag">Work</div>
-                </div>
-            </div>
+            <!-- Diary entries will be populated dynamically by JavaScript -->
         </div>
     </div>
     
-    <div class="add-button">+</div>
-    
-    <!-- Diary Detail Pages -->
-    <div id="diary-detail-random" class="diary-detail">
-        <div class="detail-header">
-            <div class="back-button" onclick="hideDiaryDetail('random')">←</div>
-            <h2>Random Thoughts</h2>
+    <div class="footer">
+        <div class="footer-copyright">© 2024 Rahul. All rights reserved.
         </div>
-        <div class="detail-time">November 29, 2023 - 07:23 AM</div>
-        <div class="detail-content">
-            <p>Contemplating life's mysteries, like why do we press harder on the remote control when we know the batteries are weak? It's as if we believe our extra force will somehow transfer energy into the dying batteries.</p>
-            
-            <p>Also wondered why we have eyebrows. Besides the obvious function of keeping sweat out of our eyes, they're strangely expressive. Entire conversations can happen with just eyebrow movements.</p>
-            
-            <p>Noticed how we all pretend to read the terms and conditions but just scroll to the bottom and click "I agree." What if there's something important in there? What if one day they slip in "you agree to give us your firstborn child" and we just casually accept it?</p>
-            
-            <p>And why do we open the refrigerator multiple times hoping food will magically appear? As if the fridge fairy will deliver snacks between our checks.</p>
-            
-            <div class="detail-tag">Random</div>
-        </div>
-    </div>
-    
-    <div id="diary-detail-adventure" class="diary-detail">
-        <div class="detail-header">
-            <div class="back-button" onclick="hideDiaryDetail('adventure')">←</div>
-            <h2>Afternoon Adventures</h2>
-        </div>
-        <div class="detail-time">November 29, 2023 - 12:45 PM</div>
-        <div class="detail-content">
-            <p>Embarked on a quest to find the missing sock. Turned the laundry room upside down searching for the blue striped sock that seems to have vanished into thin air.</p>
-            
-            <p>After careful investigation and consideration of all possible explanations, I've concluded that the washing machine is definitely a portal to a sock dimension. There's simply no other logical explanation for how socks can enter the washer in pairs and emerge as singles.</p>
-            
-            <p>Perhaps in this alternate dimension, there's a creature with thousands of mismatched socks, wondering how they keep appearing. Or maybe there's a thriving sock economy where my missing items are highly valued currency.</p>
-            
-            <p>In related news, I've decided to only buy identical socks from now on. Let's see how the sock dimension deals with that strategy!</p>
-            
-            <div class="detail-tag">Adventure</div>
-        </div>
-    </div>
-    
-    <div id="diary-detail-office" class="diary-detail">
-        <div class="detail-header">
-            <div class="back-button" onclick="hideDiaryDetail('office')">←</div>
-            <h2>Office Escapades</h2>
-        </div>
-        <div class="detail-time">November 29, 2023 - 04:30 PM</div>
-        <div class="detail-content">
-            <p>Survived another round of Zoom meetings today. Three hours of my life I'll never get back, but at least I've perfected the art of looking engaged while actually daydreaming about my next vacation.</p>
-            
-            <p>The highlight was when Jim forgot he wasn't on mute and had a full conversation with his cat about dinner plans. Everyone pretended not to notice, but the chat was exploding with cat emojis.</p>
-            
-            <p>Sarah's virtual background glitched again, causing her head to repeatedly disappear and reappear throughout her presentation. Somehow made her points about quarterly projections much more interesting.</p>
-            
-            <p>Made a game of counting how many times the boss said "circle back" (final tally: 17). Small victories keep me going.</p>
-            
-            <div class="detail-tag">Work</div>
+        <div class="footer-links">
+            <a href="about.html">About</a>
+            <a href="privacy.html">Privacy</a>
+            <!-- <a href="#" onclick="showNewEntryForm()">New Entry</a> -->
+            <a href="mailto:rahulr@mailo.com">Contact</a>
         </div>
     </div>
     
     <script>
-        // Display current date and time
-        function updateDateTime() {
-            const now = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const dateStr = now.toLocaleDateString('en-US', options);
-            const timeStr = now.toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'});
+        // Data structure to store diary entries
+        const diaryEntries = {
+            // Format: 'YYYY-MM-DD': [{title, content, time, category}]
+            '2024-03-17': [
+                {
+                    id: 'lesson-001',
+                    title: '🎓 The Beginning..',
+                    content: '🤔 Hmm, where do I start?',
+                    time: '10:23 PM',
+                    timestamp: '2024-03-17T22:23:00',
+                    category: 'Read More',
+                    fullContent: [
+                        '🤔 Hmm, where do I start?',
+                        'This journey began 2 or 3 months ago, but now, within just 2 months, I have seen many faces in college. I\'ve witnessed teachers\' anger 😡, made friends 🤝, and bunked classes together 😆. Some people came as pairs from Malur 👫 but lost their partners 💔 and found new ones. Some joined BCA because of their friends, parents, or lovers ❤️.',
+                        'This is just the beginning of our 3-year stay. Stay tuned as we expose all the secrets 🔥 and document the Lowry life! 📖'
+                    ]
+                }
+            ],
+            '2024-03-18': [
+                {
+                    id: 'work-001',
+                    title: 'Waiting..',
+                    content: 'Yet to Write...',
+                    time: '04:30 PM',
+                    timestamp: '2024-03-18T16:30:00',
+                    category: 'Read more',
+                    fullContent: [
+                        'Yet to Write...'
+                    ]
+                }
+            ]
+        };
+
+        // Local storage key for diary entries
+        const STORAGE_KEY = 'personal_diary_entries';
+
+        // Load entries from localStorage on page load
+        function loadEntriesFromStorage() {
+            const savedEntries = localStorage.getItem(STORAGE_KEY);
+            if (savedEntries) {
+                // Merge saved entries with default entries
+                const parsedEntries = JSON.parse(savedEntries);
+                Object.keys(parsedEntries).forEach(date => {
+                    diaryEntries[date] = parsedEntries[date];
+                });
+            }
+            // Save the merged entries back to storage
+            saveEntriesToStorage();
+        }
+
+        // Save entries to localStorage
+        function saveEntriesToStorage() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(diaryEntries));
+        }
+
+        // Initialize the diary system
+        function initDiary() {
+            // Load entries from storage
+            loadEntriesFromStorage();
             
-            document.getElementById('current-date').textContent = dateStr;
-            document.getElementById('current-time').textContent = timeStr;
+            // Update calendar with loaded entries
+            updateCalendar();
+            
+            // Select today's date or default to the first date with entries
+            const today = new Date().toISOString().split('T')[0];
+            
+            // If today has entries, select today, otherwise select the first date with entries
+            if (diaryEntries[today]) {
+                selectDate(today);
+            } else {
+                // Get all dates and sort them
+                const dates = Object.keys(diaryEntries).sort();
+                if (dates.length > 0) {
+                    selectDate(dates[0]);
+                } else {
+                    // If no entries exist yet, create an entry for today
+                    if (!diaryEntries[today]) {
+                        diaryEntries[today] = [];
+                    }
+                    selectDate(today);
+                }
+            }
+        }
+
+        // Update calendar to show dates with entries
+        function updateCalendar() {
+            const calendarContainer = document.querySelector('.calendar-scroll');
+            calendarContainer.innerHTML = ''; // Clear existing calendar
+            
+            // Get all dates from entries
+            const dates = Object.keys(diaryEntries).sort();
+            
+            // Generate calendar days
+            dates.forEach(dateStr => {
+                const date = new Date(dateStr);
+                const day = document.createElement('div');
+                day.className = 'calendar-day';
+                day.setAttribute('data-date', dateStr);
+                
+                const monthDiv = document.createElement('div');
+                monthDiv.className = 'month';
+                monthDiv.textContent = date.toLocaleString('default', { month: 'short' });
+                
+                const dateDiv = document.createElement('div');
+                dateDiv.className = 'date';
+                dateDiv.textContent = date.getDate();
+                
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'day';
+                dayDiv.textContent = date.toLocaleString('default', { weekday: 'short' });
+                
+                day.appendChild(monthDiv);
+                day.appendChild(dateDiv);
+                day.appendChild(dayDiv);
+                
+                // Add click event
+                day.addEventListener('click', function() {
+                    selectDate(dateStr);
+                });
+                
+                calendarContainer.appendChild(day);
+            });
+            
+            // Add option to create entry for a new date
+            addNewDateOption(calendarContainer);
         }
         
-        // Update time on load
-        updateDateTime();
-        // Update time every minute
-        setInterval(updateDateTime, 60000);
+        // Add an option to create an entry for a new date
+        function addNewDateOption(container) {
+            const newDay = document.createElement('div');
+            newDay.className = 'calendar-day';
+            
+            const plusIcon = document.createElement('div');
+            plusIcon.className = 'date';
+            plusIcon.textContent = '+';
+            plusIcon.style.fontSize = '24px';
+            
+            const newText = document.createElement('div');
+            newText.className = 'day';
+            newText.textContent = 'New';
+            
+            newDay.appendChild(plusIcon);
+            newDay.appendChild(newText);
+            
+            newDay.addEventListener('click', showDatePicker);
+            
+            container.appendChild(newDay);
+        }
         
-        function showDiaryDetail(type) {
-            document.getElementById('diary-detail-' + type).style.display = 'block';
+        // Show date picker for new entry
+        function showDatePicker() {
+            // In a real app, show a date picker
+            // For now, we'll just create a new entry for tomorrow
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const tomorrowStr = tomorrow.toISOString().split('T')[0];
+            
+            // Create empty entry array if it doesn't exist
+            if (!diaryEntries[tomorrowStr]) {
+                diaryEntries[tomorrowStr] = [];
+            }
+            
+            // Update calendar and select the new date
+            updateCalendar();
+            selectDate(tomorrowStr);
+            showNewEntryForm();
+        }
+
+        // Select a date and display its entries
+        function selectDate(dateStr) {
+            // Update active class on calendar
+            const calendarDays = document.querySelectorAll('.calendar-day');
+            calendarDays.forEach(day => {
+                day.classList.remove('active');
+                if (day.getAttribute('data-date') === dateStr) {
+                    day.classList.add('active');
+                }
+            });
+            
+            // Update entries in timeline
+            updateTimelineEntries(dateStr);
+        }
+
+        // Helper function to truncate text
+        function truncateText(text, maxLength = 100) {
+            if (text.length <= maxLength) return text;
+            return text.substring(0, maxLength).trim() + '...';
+        }
+
+        // Update the timeline with entries for the selected date
+        function updateTimelineEntries(dateStr) {
+            const timelineContainer = document.querySelector('.diary-timeline');
+            
+            // Keep the timeline line
+            timelineContainer.innerHTML = '<div class="timeline-line"></div>';
+            
+            // Get entries for the selected date
+            const entries = diaryEntries[dateStr] || [];
+            
+            if (entries.length === 0) {
+                // No entries for this date, show a message
+                const noEntries = document.createElement('div');
+                noEntries.className = 'diary-entry';
+                noEntries.innerHTML = `
+                    <div class="timeline-dot"></div>
+                    <div class="diary-card">
+                        <h3>No entries yet</h3>
+                        <p>Click the + button to add your first entry for this date.</p>
+                    </div>
+                `;
+                timelineContainer.appendChild(noEntries);
+            } else {
+                // Add entries to timeline
+                entries.forEach(entry => {
+                    const entryElement = document.createElement('div');
+                    entryElement.className = 'diary-entry';
+                    entryElement.setAttribute('data-id', entry.id);
+                    
+                    // Extract date info for file naming
+                    const date = new Date(dateStr);
+                    const month = date.toLocaleString('default', { month: 'short' }).toLowerCase();
+                    const day = date.getDate();
+                    // Create file name in format mar17.html
+                    const filePrefix = `${month.substring(0, 3)}${day}`;
+                    
+                    // Try to fetch and sync the title and first paragraph from the HTML file
+                    fetch(`${filePrefix}.html`)
+                        .then(response => response.text())
+                        .then(html => {
+                            // Extract title and content from HTML content
+                            const titleMatch = html.match(/<div class="entry-title">(.*?)<\/div>/s);
+                            const contentMatch = html.match(/<div class="entry-content">([\s\S]*?)<\/div>/);
+                            
+                            if (titleMatch && titleMatch[1]) {
+                                entry.title = titleMatch[1].trim();
+                            }
+                            
+                            if (contentMatch && contentMatch[1]) {
+                                // Extract first paragraph text
+                                const firstParaMatch = contentMatch[1].match(/<p>(.*?)<\/p>/);
+                                if (firstParaMatch && firstParaMatch[1]) {
+                                    entry.content = firstParaMatch[1].trim();
+                                }
+                                
+                                // Extract all paragraphs for full content
+                                const allParas = contentMatch[1].match(/<p>.*?<\/p>/g);
+                                if (allParas) {
+                                    entry.fullContent = allParas.map(p => 
+                                        p.replace(/<p>(.*?)<\/p>/, '$1').trim()
+                                    );
+                                }
+                            }
+                            
+                            // Get category from tag
+                            const tagMatch = html.match(/<span class="tag">(.*?)<\/span>/);
+                            if (tagMatch && tagMatch[1]) {
+                                entry.category = tagMatch[1].trim();
+                            }
+                            
+                            // Get time from the HTML
+                            const timeMatch = html.match(/<div class="time">(.*?)<\/div>/);
+                            if (timeMatch && timeMatch[1]) {
+                                entry.time = timeMatch[1].trim();
+                            }
+                            
+                            updateEntryElement();
+                        })
+                        .catch(() => {
+                            // If file doesn't exist or can't be loaded, use existing title
+                            updateEntryElement();
+                        });
+                    
+                    function updateEntryElement() {
+                        // Determine category class for tag
+                        const categoryClass = entry.category.toLowerCase() === 'adventure' ? 'adventure' : '';
+                        
+                        // Truncate content for timeline view
+                        const truncatedContent = truncateText(entry.content);
+                        
+                        entryElement.innerHTML = `
+                            <div class="timeline-dot"></div>
+                            <div class="diary-card">
+                                <h3>${entry.title}</h3>
+                                <p>${truncatedContent}</p>
+                                <div class="diary-time">${entry.time}</div>
+                                <div class="tag ${categoryClass}">${entry.category}</div>
+                            </div>
+                        `;
+                        
+                        // Add click handler to navigate to the corresponding HTML file
+                        entryElement.addEventListener('click', function() {
+                            window.location.href = `${filePrefix}.html`;
+                        });
+                    }
+                    
+                    // Initial render with existing title
+                    updateEntryElement();
+                    timelineContainer.appendChild(entryElement);
+                });
+            }
+        }
+
+        // Show entry detail view
+        function showEntryDetail(entry, dateStr) {
+            // Check if detail div exists
+            let detailDiv = document.getElementById(`diary-detail-${entry.id}`);
+            
+            if (!detailDiv) {
+                // Create detail div if it doesn't exist
+                detailDiv = document.createElement('div');
+                detailDiv.id = `diary-detail-${entry.id}`;
+                detailDiv.className = 'diary-detail';
+                
+                // Format date for display
+                const entryDate = new Date(dateStr);
+                const formattedDate = entryDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                
+                // Generate paragraphs from full content
+                const contentHTML = entry.fullContent 
+                    ? entry.fullContent.map(para => `<p>${para}</p>`).join('') 
+                    : `<p>${entry.content}</p>`;
+                
+                // Determine category class for tag
+                const categoryClass = entry.category.toLowerCase() === 'adventure' ? 'adventure' : '';
+                
+                detailDiv.innerHTML = `
+                    <div class="detail-header">
+                        <div class="back-button" onclick="hideEntryDetail('${entry.id}')">←</div>
+                        <h2>${entry.title}</h2>
+                    </div>
+                    <div class="detail-time">${formattedDate} - ${entry.time}</div>
+                    <div class="detail-content">
+                        ${contentHTML}
+                        <div class="detail-tag ${categoryClass}">${entry.category}</div>
+                    </div>
+                `;
+                
+                document.body.appendChild(detailDiv);
+            }
+            
+            // Show the detail view
+            detailDiv.style.display = 'block';
             document.body.style.overflow = 'hidden';
         }
         
-        function hideDiaryDetail(type) {
-            document.getElementById('diary-detail-' + type).style.display = 'none';
-            document.body.style.overflow = 'auto';
+        // Hide entry detail view
+        function hideEntryDetail(entryId) {
+            const detailDiv = document.getElementById(`diary-detail-${entryId}`);
+            if (detailDiv) {
+                detailDiv.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
         }
-        
-        function navigateToDate(dateFile) {
-            // Navigate directly to the date file
-            window.location.href = dateFile;
-        }
-        
-        // Make calendar days clickable
-        const calendarDays = document.querySelectorAll('.calendar-day');
-        calendarDays.forEach(day => {
-            day.addEventListener('click', function() {
-                calendarDays.forEach(d => d.classList.remove('active'));
-                this.classList.add('active');
-                // Navigate is now handled by the onclick attribute
+
+        // Show new entry form
+        function showNewEntryForm() {
+            // Get selected date
+            const activeDay = document.querySelector('.calendar-day.active');
+            const selectedDate = activeDay ? activeDay.getAttribute('data-date') : new Date().toISOString().split('T')[0];
+            
+            // Create form modal
+            const formModal = document.createElement('div');
+            formModal.className = 'diary-detail';
+            formModal.id = 'new-entry-form';
+            
+            // Format date for display
+            const entryDate = new Date(selectedDate);
+            const formattedDate = entryDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
             });
-        });
+            
+            formModal.innerHTML = `
+                <div class="detail-header">
+                    <div class="back-button" onclick="hideNewEntryForm()">←</div>
+                    <h2>New Entry for ${formattedDate}</h2>
+                </div>
+                <div style="padding: 20px;">
+                    <form id="diary-entry-form">
+                        <div class="form-group">
+                            <label for="entry-title" class="form-label">Title</label>
+                            <input type="text" id="entry-title" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="entry-content" class="form-label">Content</label>
+                            <textarea id="entry-content" rows="5" class="form-control" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="entry-category" class="form-label">Category</label>
+                            <select id="entry-category" class="form-control">
+                                <option value="Random">Random</option>
+                                <option value="Adventure">Adventure</option>
+                                <option value="Work">Work</option>
+                                <option value="Personal">Personal</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">Save Entry</button>
+                    </form>
+                </div>
+            `;
+            
+            document.body.appendChild(formModal);
+            
+            // Show the form
+            formModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Add submit event listener
+            document.getElementById('diary-entry-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                saveNewEntry(selectedDate);
+            });
+        }
+
+        // Hide new entry form
+        function hideNewEntryForm() {
+            const formModal = document.getElementById('new-entry-form');
+            if (formModal) {
+                formModal.remove();
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Save new entry
+        function saveNewEntry(dateStr) {
+            const title = document.getElementById('entry-title').value;
+            const content = document.getElementById('entry-content').value;
+            const category = document.getElementById('entry-category').value;
+            
+            // Create new entry
+            const now = new Date();
+            const time = now.toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'});
+            
+            const newEntry = {
+                id: `${category.toLowerCase()}-${Date.now()}`,
+                title: title,
+                content: content,
+                time: time,
+                timestamp: now.toISOString(),
+                category: category,
+                fullContent: [content]
+            };
+            
+            // Add entry to data structure
+            if (!diaryEntries[dateStr]) {
+                diaryEntries[dateStr] = [];
+            }
+            
+            diaryEntries[dateStr].push(newEntry);
+            
+            // Save to storage
+            saveEntriesToStorage();
+            
+            // Create HTML file for the new entry
+            const date = new Date(dateStr);
+            const month = date.toLocaleString('default', { month: 'short' }).toLowerCase();
+            const day = date.getDate();
+            const filePrefix = `${month.substring(0, 3)}${day}`;
+            
+            const htmlContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title}</title>
+    <link rel="stylesheet" href="diary.css">
+</head>
+<body>
+    <div class="page-container theme-${category.toLowerCase()}">
+        <div class="header">
+            <a href="index.html" class="back-arrow">←</a>
+            <div class="entry-title">${title}</div>
+        </div>
+        
+        <div class="date-container">
+            <div class="date">${date.toLocaleString('default', { month: 'long' })} ${day}</div>
+            <div class="time">${time}</div>
+        </div>
+        
+        <div class="author-line">Written by Rahul & Siri</div>
+        
+        <div class="entry-content">
+            ${content.split('\n').map(para => `<p>${para}</p>`).join('\n')}
+        </div>
+        
+        <div style="text-align: center;">
+            <span class="tag">${category}</span>
+        </div>
+        
+        <div class="mood-indicator">
+            <div class="mood-emoji">😊</div>
+            <div>Feeling thoughtful today</div>
+        </div>
+    </div>
+</body>
+</html>`;
+
+            // Create a Blob containing the HTML content
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            
+            // Create a download link and trigger it
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `${filePrefix}.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(a.href);
+            
+            // Update UI
+            updateCalendar();
+            selectDate(dateStr);
+            
+            // Hide form
+            hideNewEntryForm();
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', initDiary);
+
+        // Expose functions to global scope for onclick attributes
+        window.hideEntryDetail = hideEntryDetail;
+        window.hideNewEntryForm = hideNewEntryForm;
     </script>
 </body>
 </html>
